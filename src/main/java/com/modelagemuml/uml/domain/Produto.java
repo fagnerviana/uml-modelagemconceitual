@@ -9,38 +9,45 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
-//Comentario informando que esta classe é uma entidade.
+
 @Entity
-public class Categoria implements Serializable{
-	
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//Esta anotação informa que o atributo ID , será uma pk e o @GeneratedValue - irá gerar os id automaticamente
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private Double preco;
 	
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();	
-	
-	//Contrutores
-	public Categoria() {
-		
+	@ManyToMany
+	@JoinTable(name = "PRODUTO_CATEGORIA",
+	joinColumns=@JoinColumn(name="produto_id"),
+	inverseJoinColumns = @JoinColumn(name="categoria_id")
+			)
+	private List<Categoria> categorias = new ArrayList();
+
+	public Produto() {
+
 	}
-	
-	public Categoria(Integer id,String nome) {
-		this.id=id;
-		this.nome=nome;
+
+	public Produto(Integer id, String nome, Double preco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+
 	}
-	
-	//Equals e hascode
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,36 +56,40 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
 	}
-	//Getter e Setter
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + "]";
+	public Double getPreco() {
+		return preco;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
-	
-	
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
 
 }
