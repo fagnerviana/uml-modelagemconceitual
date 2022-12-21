@@ -26,13 +26,15 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
-	@JsonBackReference
+	
+	//Criação da tabela Produto_Categoria
+	//@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 	joinColumns=@JoinColumn(name="produto_id"),
 	inverseJoinColumns = @JoinColumn(name="categoria_id")
 			)
-	
+	//@ManyToMany(mappedBy="produtos")
 	private List<Categoria> categorias = new ArrayList();
 
 	public Produto() {
