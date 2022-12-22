@@ -2,12 +2,12 @@ package com.modelagemuml.uml.domain;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cidade implements Serializable{
@@ -22,14 +22,22 @@ public class Cidade implements Serializable{
 	@JoinColumn(name="estado_id")
 	private Estado estado;
 	
-	public Cidade(Integer id, String nome) {
+	public Cidade() {
+		
+	}
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.estado=estado;
+		
 	}
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Cidade [id=" + id + ", nome=" + nome + "]";
+		return "Cidade [id=" + id + ", nome=" + nome + ", estado=" + estado + "]";
 	}
 	public Integer getId() {
 		return id;

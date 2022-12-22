@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.modelagemuml.uml.domain.Categoria;
 import com.modelagemuml.uml.domain.Produto;
 import com.modelagemuml.uml.repositories.ProdutoRepository;
 import com.modelagemuml.uml.services.exception.ObjectNotFoundException;

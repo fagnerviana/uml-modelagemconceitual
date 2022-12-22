@@ -23,7 +23,7 @@ public class CategoriaService {
 		
 		//return Optional.ofNullable(obj.orElseThrow());
 		return Optional.of(obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName())));
+			 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName())));
 	}
 
 }
