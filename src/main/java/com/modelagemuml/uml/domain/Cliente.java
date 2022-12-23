@@ -15,10 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
 
 
 @Entity
+@Proxy(lazy = false)
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -30,8 +35,10 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;	
 	//Um cliente tem varios endereços
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
-	private List<Endereco> endereco= new ArrayList<>();
+	private List<Endereco> enderecos= new ArrayList<>();
 	
 	//Criação de coleções para representar o telefone, onde não pode duplicar os valores
 	@ElementCollection
@@ -72,7 +79,7 @@ public class Cliente implements Serializable{
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", cpfOuCnpj=" + cpfOuCnpj + ", tipo="
-				+ tipo + ", endereco=" + endereco + ", telefones=" + telefones + "]";
+				+ tipo + ", endereco=" + ", telefones=" + telefones + "]";
 	}
 
 	public Integer getId() {
@@ -107,22 +114,22 @@ public class Cliente implements Serializable{
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public Integer getTipo() {
-		return tipo;
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
 	}
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
 	}
-
+/*
 	public List<Endereco> getEndereco() {
-		return endereco;
+		return enderecos;
 	}
 
 	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
+		this.enderecos = endereco;
 	}
-
+*/
 	public Set<String> getTelefones() {
 		return telefones;
 	}

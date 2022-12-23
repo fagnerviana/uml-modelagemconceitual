@@ -1,7 +1,7 @@
 package com.modelagemuml.uml;
 
 import java.util.Arrays;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -71,30 +71,29 @@ public class UmlApplication implements CommandLineRunner{
 		Estado est2 = new Estado(null,"Minas Gerais");
 		Estado est3 = new Estado(null,"Rio de Jneiro");
 		
-		Cidade cid1 = new Cidade(1,"Salvador",est1);
-		Cidade cid2 = new Cidade(2,"Lauro de Freitas",est1);
-		Cidade cid3 = new Cidade(3,"Uberlandia",est2);
-		Cidade cid4 = new Cidade(4,"Niteroi",est3);
+		Cidade cid1 = new Cidade(null,"Salvador",est1);
+		Cidade cid2 = new Cidade(null,"Lauro de Freitas",est1);
+		Cidade cid3 = new Cidade(null,"Uberlandia",est2);
+		Cidade cid4 = new Cidade(null,"Niteroi",est3);
 		
-		/*
+		
 		est1.getCidades().addAll(Arrays.asList(cid1,cid2));
 		est2.getCidades().addAll(Arrays.asList(cid3));
 		est3.getCidades().addAll(Arrays.asList(cid4));
-		*/
+		
 	  estadoRepository.saveAll(Arrays.asList(est1,est2,est3));
 	  cidadeRepository.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
 	  
 		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@email.com", "12345678910", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("71986191047", "71987334311"));
-
+		
 		Endereco e1 = new Endereco(null, "Rua Esperança de viver ", "12E", "Proximo escoal Cidade Nova", "Cidade Nova",
 				"40313440", cli1, cid1);
 
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, cid4);
 
-		cli1.getEndereco().addAll(Arrays.asList(e1, e2));
-		
-		
+		//cli1.getEndereco().addAll(Arrays.asList(e1, e2));
+				
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
