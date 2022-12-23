@@ -14,10 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import org.hibernate.annotations.Proxy;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
 
@@ -45,11 +42,17 @@ public class Cliente implements Serializable{
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	
+	//Criação da Lista de Pedidos do cliente
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
 	//Criação de construtores 
 	public Cliente() {
 		
 	}
-
+	//Observação coleções e lista não pode ser inclusas nos construtores
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
@@ -121,7 +124,7 @@ public class Cliente implements Serializable{
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo.getCod();
 	}
-/*
+
 	public List<Endereco> getEndereco() {
 		return enderecos;
 	}
@@ -129,13 +132,19 @@ public class Cliente implements Serializable{
 	public void setEndereco(List<Endereco> endereco) {
 		this.enderecos = endereco;
 	}
-*/
+
 	public Set<String> getTelefones() {
 		return telefones;
 	}
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 	

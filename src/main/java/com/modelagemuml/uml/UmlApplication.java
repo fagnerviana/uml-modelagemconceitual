@@ -1,7 +1,7 @@
 package com.modelagemuml.uml;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,13 +13,20 @@ import com.modelagemuml.uml.domain.Cidade;
 import com.modelagemuml.uml.domain.Cliente;
 import com.modelagemuml.uml.domain.Endereco;
 import com.modelagemuml.uml.domain.Estado;
+import com.modelagemuml.uml.domain.Pagamento;
+import com.modelagemuml.uml.domain.PagamentoBoleto;
+import com.modelagemuml.uml.domain.PagamentoComCartao;
+import com.modelagemuml.uml.domain.Pedido;
 import com.modelagemuml.uml.domain.Produto;
+import com.modelagemuml.uml.domain.enums.EstadoPagamento;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
 import com.modelagemuml.uml.repositories.CategoriaRepository;
 import com.modelagemuml.uml.repositories.CidadeRepository;
 import com.modelagemuml.uml.repositories.ClienteRepository;
 import com.modelagemuml.uml.repositories.EnderecoRepository;
 import com.modelagemuml.uml.repositories.EstadoRepository;
+import com.modelagemuml.uml.repositories.PagamentoRepository;
+import com.modelagemuml.uml.repositories.PedidoRepository;
 import com.modelagemuml.uml.repositories.ProdutoRepository;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -40,6 +47,11 @@ public class UmlApplication implements CommandLineRunner{
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(UmlApplication.class, args);
@@ -92,11 +104,24 @@ public class UmlApplication implements CommandLineRunner{
 
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, cid4);
 
-		//cli1.getEndereco().addAll(Arrays.asList(e1, e2));
+		cli1.getEndereco().addAll(Arrays.asList(e1, e2));
 				
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		Pedido pedi1 = new Pedido(null, sdf.parse("30/09/2017 10:32"),cli1,e1);
+		Pedido pedi2 = new Pedido(null, sdf.parse("10/09/2017 10:32"),cli1,e1);
+		
+		//Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO,pedi1,6);
+		Pagamento pagto1 = new PagamentoComCartao(null,2, pedi1, 6);
+		pedi1.setPagamento(pagto1);
+		//Pagamento pagto2 = new PagamentoBoleto(null,2, pedi2, sdf.parse("20/10/2022 18:30"), null);
+		//pedi2.setPagamento(pagto2);
+		cli1.getPedidos().addAll(Arrays.asList(pedi1,pedi2));
+		
+		pedidoRepository.saveAll(Arrays.asList(pedi1,pedi2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1));
 
 	}
 	
