@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.modelagemuml.uml.domain.Cliente;
 import com.modelagemuml.uml.services.ClienteService;
-import io.swagger.annotations.ApiOperation;
 
 
 //@Api(value= "Cliente")
@@ -22,7 +20,6 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService clienteService;
 	
-	@ApiOperation(value="Pesquisa o cliente pelo numero do ID")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		

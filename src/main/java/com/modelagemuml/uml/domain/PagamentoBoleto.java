@@ -3,12 +3,15 @@ package com.modelagemuml.uml.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.Entity;
-
+import jakarta.persistence.Entity;
 
 
 @Entity
 public class PagamentoBoleto extends Pagamento{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date dataVencimento;
 	private Date dataPagamento;
 	

@@ -11,18 +11,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.modelagemuml.uml.domain.Categoria;
 import com.modelagemuml.uml.services.CategoriaService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
-@Api(value= "Categoria")
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService service;
 	
-	@ApiOperation(value="Pesquisa a categoria pelo numero do ID")
+	
 	@JsonManagedReference
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {

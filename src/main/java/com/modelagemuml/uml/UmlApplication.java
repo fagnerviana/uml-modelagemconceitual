@@ -14,11 +14,10 @@ import com.modelagemuml.uml.domain.Cliente;
 import com.modelagemuml.uml.domain.Endereco;
 import com.modelagemuml.uml.domain.Estado;
 import com.modelagemuml.uml.domain.Pagamento;
-import com.modelagemuml.uml.domain.PagamentoBoleto;
+
 import com.modelagemuml.uml.domain.PagamentoComCartao;
 import com.modelagemuml.uml.domain.Pedido;
 import com.modelagemuml.uml.domain.Produto;
-import com.modelagemuml.uml.domain.enums.EstadoPagamento;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
 import com.modelagemuml.uml.repositories.CategoriaRepository;
 import com.modelagemuml.uml.repositories.CidadeRepository;
@@ -29,10 +28,8 @@ import com.modelagemuml.uml.repositories.PagamentoRepository;
 import com.modelagemuml.uml.repositories.PedidoRepository;
 import com.modelagemuml.uml.repositories.ProdutoRepository;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
 public class UmlApplication implements CommandLineRunner{
 	
 	@Autowired

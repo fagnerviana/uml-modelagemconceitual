@@ -3,15 +3,15 @@ package com.modelagemuml.uml.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -28,8 +28,8 @@ public class Endereco implements Serializable {
 	private String cep;
 	
 	//Muito endereco para um cliente
-	@JsonBackReference
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	

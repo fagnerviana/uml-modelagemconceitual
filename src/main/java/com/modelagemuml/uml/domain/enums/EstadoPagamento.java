@@ -9,7 +9,7 @@ public enum EstadoPagamento {
 		private int cod;
 		private String descricao;
 
-		private EstadoPagamento(int i, String string) {
+		private EstadoPagamento(int cod, String descricao) {
 			this.cod=cod;
 			this.descricao=descricao;
 		}

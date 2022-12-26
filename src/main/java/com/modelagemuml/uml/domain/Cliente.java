@@ -6,21 +6,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import org.hibernate.annotations.Proxy;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,17 +31,20 @@ public class Cliente implements Serializable{
 	private Integer tipo;	
 	//Um cliente tem varios endereços
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos= new ArrayList<>();
 	
 	//Criação de coleções para representar o telefone, onde não pode duplicar os valores
+	
 	@ElementCollection
+	@JsonBackReference
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
 	
 	//Criação da Lista de Pedidos do cliente
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
