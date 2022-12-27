@@ -13,6 +13,7 @@ import com.modelagemuml.uml.domain.Cidade;
 import com.modelagemuml.uml.domain.Cliente;
 import com.modelagemuml.uml.domain.Endereco;
 import com.modelagemuml.uml.domain.Estado;
+import com.modelagemuml.uml.domain.ItemPedido;
 import com.modelagemuml.uml.domain.Pagamento;
 
 import com.modelagemuml.uml.domain.PagamentoComCartao;
@@ -24,6 +25,7 @@ import com.modelagemuml.uml.repositories.CidadeRepository;
 import com.modelagemuml.uml.repositories.ClienteRepository;
 import com.modelagemuml.uml.repositories.EnderecoRepository;
 import com.modelagemuml.uml.repositories.EstadoRepository;
+import com.modelagemuml.uml.repositories.ItemPedidoRepository;
 import com.modelagemuml.uml.repositories.PagamentoRepository;
 import com.modelagemuml.uml.repositories.PedidoRepository;
 import com.modelagemuml.uml.repositories.ProdutoRepository;
@@ -48,6 +50,9 @@ public class UmlApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -119,6 +124,19 @@ public class UmlApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(pedi1,pedi2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1));
+		
+		ItemPedido ip1= new ItemPedido(pedi1,p1,0.00,1,2000.00);
+		ItemPedido ip2 = new ItemPedido(pedi1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(pedi2,p2,100.00,1,800.00);
+		
+		pedi1.getItens().addAll(Arrays.asList(ip1,ip2));
+		pedi2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p1.getItens().addAll(Arrays.asList(ip1));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 
 	}
 	
