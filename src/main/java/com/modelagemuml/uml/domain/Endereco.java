@@ -58,8 +58,6 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 	
-	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -147,8 +145,5 @@ public class Endereco implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-
- 
-	
 
 }

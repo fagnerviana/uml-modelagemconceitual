@@ -2,8 +2,8 @@ package com.modelagemuml.uml.domain.enums;
 
 public enum EstadoPagamento {
 	// melhor fazer o controle manual das numerações e informar a descrição
-		PENDENTE(1, "Pendente"), 
-		QUITADO(2, "Quitado"),
+		PENDENTE(1,"Pendente"), 
+		QUITADO(2,"Quitado"),
 		CANCELADO(3,"Cancelado");
 
 		private int cod;

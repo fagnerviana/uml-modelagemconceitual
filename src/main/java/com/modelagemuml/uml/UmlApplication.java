@@ -19,6 +19,7 @@ import com.modelagemuml.uml.domain.Pagamento;
 import com.modelagemuml.uml.domain.PagamentoComCartao;
 import com.modelagemuml.uml.domain.Pedido;
 import com.modelagemuml.uml.domain.Produto;
+import com.modelagemuml.uml.domain.enums.EstadoPagamento;
 import com.modelagemuml.uml.domain.enums.TipoCliente;
 import com.modelagemuml.uml.repositories.CategoriaRepository;
 import com.modelagemuml.uml.repositories.CidadeRepository;
